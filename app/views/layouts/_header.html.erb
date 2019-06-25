@@ -1,0 +1,23 @@
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Simple Demo</a>
+    </div>
+    <ul class="nav navbar-nav">
+
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <% if current_user.has_role? :superadmin %>
+        <li><%= link_to "Home", superadmin_home_path %></li>
+        <li><%= link_to "Admin", superadmin_users_path %></li>
+        <li><%= link_to "Account", edit_superadmin_user_path(current_user.id) %></li>
+        <li><%= link_to "Departments", superadmin_departments_path %></li>
+        <li><%= link_to "Logout", destroy_user_session_path, method: :delete %><li>
+      <% elsif current_user.has_role? :admin %>
+        <li><%= link_to "Home", new_admin_user_path %></li>
+        <li><%= link_to "Account", edit_admin_user_path(current_user.id) %></li>
+        <li><%= link_to "Logout", destroy_user_session_path, method: :delete %><li>
+      <% end %>
+    </ul>
+  </div>
+</nav>

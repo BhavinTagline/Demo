@@ -1,0 +1,64 @@
+<h1>Sign up</h1>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+  <%= render "devise/shared/error_messages", resource: resource %>
+
+    <%= f.label :name %>
+    <%= f.text_field :name, class: 'form-control' %>
+
+    <%= f.label :age %>
+    <%= f.text_field :age, class: 'form-control' %>
+
+    <%= f.label :country %>
+    <%= f.select :country, %w{India USA Canada}, {:prompt => 'Select'}, required: true, placeholder: 'Country', class: 'form-control' %>
+
+    <div class="row">
+      <div class="form-group">
+        <div class="col-md-12 nopadding">
+          <div class="col-md-2 nopadding">
+            <label class="btn">
+              <%= f.label :gender, 'Gender :' %>
+            </label>
+          </div>
+          <div class="col-md-2 nopadding">
+            <label class="btn">
+              <%= f.radio_button :gender, 'Male', class: 'inline-block' %>
+              <%= f.label :gender, 'Male' %>
+            </label>
+          </div>
+          <div class="col-md-2 nopadding">
+            <label class="btn">
+              <%= f.radio_button :gender, 'Female', class: 'inline-block' %>
+              <%= f.label :gender, 'Female' %>
+            </label>
+          </div>
+          <div class="col-md-2">
+            <label class="btn">
+              <%= f.radio_button :gender, 'Other', class: 'inline-block' %>
+              <%= f.label :gender, 'Other' %>
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <%= f.label :email %><br />
+    <%= f.email_field :email, class: 'form-control' %>
+
+    <%= f.label :password %>
+    <% if @minimum_password_length %>
+    <em>(<%= @minimum_password_length %> characters minimum)</em>
+    <% end %><br />
+    <%= f.password_field :password, class: 'form-control' %>
+
+    <%= f.label :password_confirmation %><br />
+    <%= f.password_field :password_confirmation, class: 'form-control'%>
+
+    <%= f.submit "Sign up", class: "btn btn-primary" %>
+
+<% end %>
+
+<%= render "users/shared/links" %>
+</div>
+</div>
