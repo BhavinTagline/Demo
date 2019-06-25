@@ -50,6 +50,27 @@
     </div>
 
     <div class="form-group">
+      <%= f.label :department, "Department : " %>
+        <%= f.fields_for :admin_depts do |a| %>
+        <%#= puts "---------#{a.inspect}----------------" %>
+          <%#= a.check_box :department_id, %>
+          <%= a.collection_check_boxes :department_id, Department.all, :id, :name do |d| %>
+            <!-- <div class="collection-check-box"> -->
+              <%#= puts "---------#{d.inspect}----------------" %>
+              <label>
+              <%= d.check_box %>
+              <%= d.label %></label>
+            <!-- </div> -->
+          <% end %>
+        <% end %>
+    </div>
+    <%#= task_form.link_to_remove "Remove this task" %>
+    <%#= f.label :remember_me, class: "checkbox inline" do %>
+        <%#= f.check_box :remember_me %>
+        <!-- <span>Remember Me</span> -->
+      <%# end %>
+
+    <div class="form-group">
       <%= f.label :"email" %>
       <%= f.email_field :email, class: 'form-control' %>
     </div>

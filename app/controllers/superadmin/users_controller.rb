@@ -16,7 +16,10 @@ class Superadmin::UsersController < ApplicationController
   end
 
   def new
-      @user = User.new
+    @user = User.new
+     # @departments = Department.all
+     # @user.departments.build
+    @user.admin_depts.build
   end
 
   def home
@@ -69,7 +72,7 @@ class Superadmin::UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:name, :age, :country, :gender, :email, :password, :password_confirmation)
+    params.require(:user).permit(:name, :age, :country, :gender, :email, :password, :password_confirmation, admin_depts_attributes: [:id, :department_id, :_destroy])
   end
 
   def user_update_params

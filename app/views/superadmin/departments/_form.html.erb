@@ -1,0 +1,14 @@
+<h1><%= @department.new_record? ? "Add Department" : "Edit Department" %></h1>
+<div class="row">
+  <div class="col-md-4 col-md-offset-4">
+    <% button = @department.new_record? ? "Add" : "Update" %>
+      <%= form_for(@department, url: @department.new_record? ? superadmin_departments_path : superadmin_department_path ) do |f| %>
+      <%#= render 'shared/error_messages', object: f.object %>
+    <div class="form-group">
+      <%= f.label :name %>
+      <%= f.text_field :name, class: 'form-control' %>
+    </div>
+    <%= f.submit button, class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>
