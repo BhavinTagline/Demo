@@ -1,6 +1,7 @@
 class Superadmin::UsersController < ApplicationController
 
   before_action :authenticate_superadmin
+  before_action :set_user, only: [:edit, :show, :update, :destroy]
 
   def index
     @users = User.with_role :admin
@@ -17,8 +18,6 @@ class Superadmin::UsersController < ApplicationController
 
   def new
     @user = User.new
-     # @departments = Department.all
-     # @user.departments.build
     @user.admin_depts.build
   end
 
@@ -27,18 +26,13 @@ class Superadmin::UsersController < ApplicationController
   end
 
   def edit
-    @user = User.find(params[:id])
   end
 
   def show
-    @user = User.find(params[:id])
   end
 
   def update
-   @user = User.find(params[:id])
-     puts "---------#{current_user.inspect}-------------------"
-     puts "-----#{@user.inspect}--"
-     if @user.update_attributes(user_update_params)
+     if @user.update(user_params)
        if @user.id == current_user.id
          redirect_to superadmin_user_path
        else
@@ -58,7 +52,7 @@ class Superadmin::UsersController < ApplicationController
 
 
      def destroy
-       User.find(params[:id]).destroy
+       @user.destroy
        redirect_to superadmin_users_path
      end
 
@@ -71,14 +65,24 @@ class Superadmin::UsersController < ApplicationController
     end
   end
 
+  def set_user
+    @user = User.find(params[:id])
+  end
+
   def user_params
-    params.require(:user).permit(:name, :age, :country, :gender, :email, :password, :password_confirmation, admin_depts_attributes: [:id, :department_id, :_destroy])
+    params
+      .require(:user)
+      .permit(
+              :name,
+              :age,
+              :country,
+              :gender,
+              :email,
+              :password,
+              :password_confirmation,
+              department_ids: []
+            )
+    # admin_depts_attributes: [:id, :department_ids]
   end
-
-  def user_update_params
-    params.require(:user).permit(:name, :age, :country, :gender, :email)
-  end
-
-
 
 end

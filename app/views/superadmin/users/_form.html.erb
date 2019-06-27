@@ -1,4 +1,4 @@
-<h1><%= @user.new_record? ? "New Form" : "Edit Profile" %></h1>
+<h1><%= @user.new_record? ? "Add Admin" : "Edit Profile" %></h1>
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
     <% button = @user.new_record? ? "Add" : "Update" %>
@@ -19,31 +19,33 @@
       <%= f.select :country, %w{India USA Canada}, {:prompt => 'Select'}, required: true, placeholder: 'Country', class: 'form-control' %>
     </div>
 
-    <div class="row">
-      <div class="form-group">
-        <div class="col-md-12 nopadding">
-          <div class="col-md-2 nopadding">
-            <label class="btn">
-              <%= f.label :gender, 'Gender :' %>
-            </label>
-          </div>
-          <div class="col-md-2 nopadding">
-            <label class="btn">
-              <%= f.radio_button :gender, 'Male', class: 'inline-block' %>
-              <%= f.label :gender, 'Male' %>
-            </label>
-          </div>
-          <div class="col-md-2 nopadding">
-            <label class="btn">
-              <%= f.radio_button :gender, 'Female', class: 'inline-block' %>
-              <%= f.label :gender, 'Female' %>
-            </label>
-          </div>
-          <div class="col-md-2">
-            <label class="btn">
-              <%= f.radio_button :gender, 'Other', class: 'inline-block' %>
-              <%= f.label :gender, 'Other' %>
-            </label>
+    <div class="form-group">
+      <div class="row">
+        <div class="form-group">
+          <div class="col-md-12 nopadding">
+            <div class="col-md-2 nopadding">
+              <label class="btn">
+                <%= f.label :gender, 'Gender :' %>
+              </label>
+            </div>
+            <div class="col-md-2 nopadding">
+              <label class="btn">
+                <%= f.radio_button :gender, 'Male', class: 'inline-block' %>
+                <%= f.label :gender, 'Male' %>
+              </label>
+            </div>
+            <div class="col-md-2 nopadding">
+              <label class="btn">
+                <%= f.radio_button :gender, 'Female', class: 'inline-block' %>
+                <%= f.label :gender, 'Female' %>
+              </label>
+            </div>
+            <div class="col-md-2">
+              <label class="btn">
+                <%= f.radio_button :gender, 'Other', class: 'inline-block' %>
+                <%= f.label :gender, 'Other' %>
+              </label>
+            </div>
           </div>
         </div>
       </div>
@@ -51,19 +53,40 @@
 
     <div class="form-group">
       <%= f.label :department, "Department : " %>
-        <%= f.fields_for :admin_depts do |a| %>
-        <%#= puts "---------#{a.inspect}----------------" %>
-          <%#= a.check_box :department_id, %>
-          <%= a.collection_check_boxes :department_id, Department.all, :id, :name do |d| %>
-            <!-- <div class="collection-check-box"> -->
-              <%#= puts "---------#{d.inspect}----------------" %>
-              <label>
-              <%= d.check_box %>
-              <%= d.label %></label>
-            <!-- </div> -->
-          <% end %>
+        <% Department.all.each do |d| %>
+          <div class="checkbox">
+           <%= check_box_tag "user[department_ids][]", d.id, @user.department_ids.include?(d.id) %>
+           <%= d.name %>
+          </div>
         <% end %>
     </div>
+        <!-- <div class="col-md-12 nopadding"> -->
+          <!-- <div style="display:inline-block;" > -->
+            <!-- <div class="col-md-2"> -->
+              <!-- <label class="abc"> -->
+
+                <!-- <label class="inline"> -->
+                <!-- <label class="check-margin"> -->
+
+             <!-- </label> -->
+            <!-- </div> -->
+          <!-- </div> -->
+      <!-- </div> -->
+
+      <%#= f.label :department, "Department : " %>
+        <%#= f.fields_for :admin_depts do |a| %>
+        <%#= puts "---------#{a.inspect}----------------" %>
+          <%#= a.collection_check_boxes :department_id, Department.all, :id, :name do |d| %>
+          <%#= a.collection_check_boxes :department_id, Department.all, :id, :name do |d| %>
+            <!-- <div class="collection-check-box"> -->
+              <%#= puts "---------#{d.inspect}----------------" %>
+              <!-- <label> -->
+              <%#= d.check_box %>
+              <%#= d.label %>
+            <!-- </label> -->
+            <!-- </div> -->
+          <%# end %>
+        <%# end %>
     <%#= task_form.link_to_remove "Remove this task" %>
     <%#= f.label :remember_me, class: "checkbox inline" do %>
         <%#= f.check_box :remember_me %>
@@ -75,17 +98,25 @@
       <%= f.email_field :email, class: 'form-control' %>
     </div>
 
-    <div class="form-group">
-      <%= f.label :password %>
-      <%= f.password_field :password, class: 'form-control' %>
-    </div>
+    <% if @user.new_record? %>
+      <div class="form-group">
+        <%= f.label :password %>
+        <%= f.password_field :password, class: 'form-control' %>
+      </div>
 
-    <div class="form-group">
-      <%= f.label :password_confirmation, "Confirm Password" %>
-      <%= f.password_field :password_confirmation, class: 'form-control' %>
-    </div>
-
+      <div class="form-group">
+        <%= f.label :password_confirmation, "Confirm Password" %>
+        <%= f.password_field :password_confirmation, class: 'form-control' %>
+      </div>
+    <% end %>
     <%= f.submit button, class: "btn btn-primary" %>
     <% end %>
   </div>
 </div>
+
+
+
+
+
+
+.

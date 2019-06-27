@@ -1,0 +1,2 @@
+module Superadmin::OraganizationHelper
+end

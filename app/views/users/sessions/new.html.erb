@@ -17,13 +17,16 @@
               <%# end %>
             <%# end %>
           </label> -->
-
+           <!-- <div class="form-check-inline"> -->
           <% if devise_mapping.rememberable? %>
-          <%= f.label :remember_me, class: "checkbox inline" do %>
+          <!-- <label> -->
+          <%= f.label :remember_me, class: "checkbox-inline" do %>
             <%= f.check_box :remember_me %>
               <span>Remember Me</span>
             <% end %>
+            <!-- </label> -->
           <% end %>
+          <!-- </div> -->
 
         <!-- <div class="col-md-4 col-md-offset-8"> -->
         <%= f.submit "Log in", class: "btn btn-primary" %>

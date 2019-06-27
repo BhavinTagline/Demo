@@ -1,6 +1,8 @@
 class Admin::UsersController < ApplicationController
 
   before_action :authenticate_admin
+  before_action :set_user_admin, only: [:edit, :show, :update, :destroy]
+
   def index
   end
 
@@ -12,15 +14,12 @@ class Admin::UsersController < ApplicationController
   end
 
   def edit
-    @user = User.find(params[:id])
   end
 
   def show
-    @user = User.find(params[:id])
   end
 
   def update
-     @user = User.find(params[:id])
      if @user.update_attributes(user_update_params)
        redirect_to admin_user_path
      else
@@ -39,6 +38,10 @@ class Admin::UsersController < ApplicationController
     unless current_user.has_role? :admin
       redirect_to root_path
     end
+  end
+
+  def set_user_admin
+    @user = User.find(params[:id])
   end
 
   def user_update_params
