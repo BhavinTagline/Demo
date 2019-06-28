@@ -1,0 +1,36 @@
+<h1><%= @organization.new_record? ? "Add Organization" : "Edit Organization" %></h1>
+  <div class="row">
+    <div class="col-md-4 col-md-offset-4">
+      <% button = @organization.new_record? ? "Add" : "Update" %>
+        <%= form_for(@organization, url: @organization.new_record? ? superadmin_organizations_path : superadmin_organization_path ) do |f| %>
+        <%#= render 'shared/error_messages', object: f.object %>
+
+      <div class="form-group">
+        <%= f.label :name %>
+        <%= f.text_field :name, class: 'form-control' %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :admin %>
+        <%= f.select :user_id, options_for_select(@users, @organization.user_id), {:prompt => "Please select"}, class: "form-control" %>
+        <%#= puts "-----------#{@users}---------------#{@organization.user_id}----------------------" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :address %>
+        <%= f.text_field :address, class: 'form-control' %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :email %>
+        <%= f.email_field :email, class: 'form-control' %>
+      </div>
+
+      <div style="display:inline-block;">
+        <%= f.submit button, class: "btn btn-primary" %></div>
+        <%= link_to "Cancel", superadmin_organizations_path, class: "btn btn-primary" %>
+
+      <% end %>
+
+    </div>
+  </div>

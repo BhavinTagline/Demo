@@ -2,6 +2,8 @@ class User < ActiveRecord::Base
   rolify
   has_many :admin_depts, dependent: :destroy
   has_many :departments, through: :admin_depts
+  has_one :organization
+  # accepts_nested_attributes_for :organization
   # accepts_nested_attributes_for :admin_depts, reject_if: :all_blank, allow_destroy: true
 
   after_create :assign_default_role

@@ -1,31 +1,12 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
-// body{background:#f9f9f9;}
-// #wrapper{padding:90px 15px;}
-// .navbar-expand-lg .navbar-nav.side-nav{flex-direction: column;}
-// .card{margin-bottom: 15px; border-radius:0; box-shadow: 0 3px 5px rgba(0,0,0,.1); }
-// .header-top{box-shadow: 0 3px 5px rgba(0,0,0,.1)}
-// .leftmenutrigger{display: none}
-// @media(min-width:992px) {
-// .leftmenutrigger{display: block;display: block;margin: 7px 20px 4px 0;cursor: pointer;}
-// #wrapper{padding: 90px 15px 15px 15px; }
-// .navbar-nav.side-nav.open {left:0;}
-// .navbar-nav.side-nav{background: #585f66;box-shadow: 2px 1px 2px rgba(0,0,0,.1);position:fixed;top:56px;flex-direction: column!important;left:-220px;width:200px;overflow-y:auto;bottom:0;overflow-x:hidden;padding-bottom:40px}
-// }
-// .animate{-webkit-transition:all .3s ease-in-out;-moz-transition:all .3s ease-in-out;-o-transition:all .3s ease-in-out;-ms-transition:all .3s ease-in-out;transition:all .3s ease-in-out}
-// .sidebar-menu {
-//   padding-top: 20px;
-//   background-color: gray;
-//   font-weight: 100;
-//   font-size: 2em;
-// }
 *{
   padding: 0;
   margin: 0
 }
 body {
-  // padding-top: 50px;
+  padding-top: 0px;
 }
 
 section {
@@ -43,10 +24,6 @@ textarea {
 .center h1 {
   margin-bottom: 10px;
 }
-
-// h1, h2, h3, h4, h5, h6 {
-//   line-height: 1;
-// }
 
 h1 {
   padding-top: 10px;
@@ -70,21 +47,6 @@ p {
   font-size: 1.1em;
   line-height: 1.7em;
 }
-//
-// #logo {
-//   float: left;
-//   margin-right: 10px;
-//   font-size: 1.7em;
-//   color: black;
-//   text-transform: uppercase;
-//   letter-spacing: -1px;
-//   padding-top: 9px;
-//   font-weight: bold;
-//   &:hover {
-//     color: red;
-//     text-decoration: none;
-//   }
-// }
 
  input, textarea, .uneditable-input {
   border: 1px solid #bbb;
@@ -138,13 +100,9 @@ input {
 }
 
 .checkbox-inline{
-  // padding: 0px;
   margin: -5px 0px 5px -100px;
-  // margin-left: -100px;
 }
-.abc{
-  margin: 0px 0px 5px -10px;
-}
+
 .inline{
   margin-left: -10px;
 }
@@ -156,6 +114,22 @@ input {
 
 label.check-margin{
   margin: 0px 117px 0px -118px;
+}
+
+.btn-primary{
+  width: 177px;
+}
+
+.btn-md{
+  width: 275px;
+}
+
+.btn-md-a{
+  width: 360px;
+}
+
+.btn-md-b{
+  width: 555px;
 }
 // .header{
 //      position:fixed;

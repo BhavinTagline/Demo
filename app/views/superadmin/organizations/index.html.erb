@@ -1,0 +1,33 @@
+<h1>Organization List</h1>
+<div class="row">
+  <div class="col-md-8 col-md-offset-2">
+    <p align="right"><%= link_to "New Organization", new_superadmin_organization_path, class: "btn btn-primary" %></p>
+      <table id="organizations" class="table table-hover">
+    	<thead class="thead-dark">
+    		<tr>
+    			<th>Name</th>
+          <th>Admin</th>
+          <th>Address</th>
+          <th>Email</th>
+          <th colspan="2">Actions</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @organizations.each do |organization| %>
+        <tr>
+          <td><%= organization.name %></td>
+          <td><%= organization.user.present? ? organization.user.email : "-" %></td>
+          <td><%= organization.address %></td>
+          <td><%= organization.email %></td>
+          <!-- <td><%#= link_to "show", superadmin_department_path(user) %></td> -->
+          <td><%= link_to "Edit", edit_superadmin_organization_path(organization) %></td>
+          <td><%= link_to "Destroy", superadmin_organization_path(organization), method: :delete, data: { confirm: "Are you sure?" } %></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+
+</div>
+</div>

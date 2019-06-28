@@ -6,6 +6,8 @@
 				<tr>
 					<th>Name</th>
 					<th>Age</th>
+          <th>Organization</th>
+          <th>Department</th>
 					<th>Country</th>
 					<th>Gender</th>
 					<th>Email</th>
@@ -15,11 +17,14 @@
 		    <tr>
 		      <td><%= @user.name %></td>
 		      <td><%= @user.age %></td>
+          <td><%= @user.organization.present? ? @user.organization.name : "-" %></td>
+          <td><%= @user.departments.pluck(:name).join(' ,') %></td>
 		      <td><%= @user.country %></td>
 		      <td><%= @user.gender %></td>
 		      <td><%= @user.email %></td>
 		    </tr>
 		  </tbody>
 		</table>
+    <p align="right"><%= link_to "Back", superadmin_users_path, class: "btn btn-primary" %></p>
 	</div>
 </div>

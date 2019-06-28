@@ -16,6 +16,7 @@ Rails.application.routes.draw do
     resources :users
     get  '/home', to: 'users#home'
     resources :departments
+    resources :organizations
     # get  '/account', to: 'users#edit'
     # post  '/account', to: 'users#update'
     # get  '/profile', to: 'users#show'

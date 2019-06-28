@@ -8,7 +8,10 @@
       <%= f.label :name %>
       <%= f.text_field :name, class: 'form-control' %>
     </div>
-    <%= f.submit button, class: "btn btn-primary" %>
+
+    <div style="display:inline-block;">
+    <%= f.submit button, class: "btn btn-primary" %></div>
+    <%= link_to "Cancel", superadmin_departments_path, class: "btn btn-primary" %>
     <% end %>
   </div>
 </div>
