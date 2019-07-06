@@ -17,15 +17,19 @@ before_action :set_organization, only: [:edit, :show, :update, :destroy]
 
     def new
       @organization = Organization.new
-      @users = User.with_role :admin
+      @users = Admin.all
       @users = @users.collect {|user| [user.email, user.id] if user.organization.nil?}.compact
     end
 
     def edit
-      @users = User.with_role :admin
+      @users = Admin.all
       @users = @users.collect {|user| [user.email, user.id] if user.organization.nil?}.compact
+      # puts "--------#{@users}------------"
       user = @organization.user
-      @users.push([user.email, user.id])
+      # puts "--------#{@organization}------------"
+      @users << ([user.email, user.id])
+      
+
     end
 
     def update
@@ -50,7 +54,16 @@ before_action :set_organization, only: [:edit, :show, :update, :destroy]
      private
 
      def organization_params
-       params.require(:organization).permit(:user_id, :name, :address, :email)
+       params
+       .require(:organization)
+       .permit(
+         :user_id,
+         :name,
+         :address,
+         :email,
+         department_ids: [],
+         # :organization_id
+       )
      end
 
      def set_organization

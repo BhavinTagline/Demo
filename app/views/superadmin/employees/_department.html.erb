@@ -1,0 +1,12 @@
+<% @departments.each do |d| %>
+  <div class="field">
+    <% if @emp.present? %>
+      <% @emp = Employee.find(@emp.id)   %>
+      <%= check_box_tag "employee[department_ids][]", d.id, @emp.department_ids.include?(d.id) %>
+      <%= d.name %>
+    <% else %>
+      <%= check_box_tag "employee[department_ids][]", d.id %>
+      <%= d.name %>
+    <% end %>
+  </div>
+<% end  %>

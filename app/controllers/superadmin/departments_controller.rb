@@ -38,7 +38,13 @@ class Superadmin::DepartmentsController < ApplicationController
    private
 
    def department_params
-     params.require(:department).permit(:name, admin_depts_attributes: [:department_id, :id])
+     params
+      .require(:department)
+      .permit(
+        :name,
+        admin_depts_attributes: [:department_id, :id],
+        employee_depts_attributes: [:department_id, :id]
+      )
    end
 
    def set_department

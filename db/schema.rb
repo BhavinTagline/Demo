@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190627045616) do
+ActiveRecord::Schema.define(version: 20190703100726) do
 
   create_table "admin_depts", force: :cascade do |t|
     t.integer  "user_id"
@@ -28,6 +28,16 @@ ActiveRecord::Schema.define(version: 20190627045616) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "employee_depts", force: :cascade do |t|
+    t.integer  "employee_id"
+    t.integer  "department_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  add_index "employee_depts", ["department_id"], name: "index_employee_depts_on_department_id"
+  add_index "employee_depts", ["employee_id"], name: "index_employee_depts_on_employee_id"
 
   create_table "organizations", force: :cascade do |t|
     t.string   "name"
@@ -50,6 +60,16 @@ ActiveRecord::Schema.define(version: 20190627045616) do
 
   add_index "roles", ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id"
   add_index "roles", ["name"], name: "index_roles_on_name"
+
+  create_table "user_organizations", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "organization_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "user_organizations", ["organization_id"], name: "index_user_organizations_on_organization_id"
+  add_index "user_organizations", ["user_id"], name: "index_user_organizations_on_user_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false

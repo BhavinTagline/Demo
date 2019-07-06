@@ -4,11 +4,11 @@ class Superadmin::UsersController < ApplicationController
   before_action :set_user, only: [:edit, :show, :update, :destroy]
 
   def index
-    @users = User.with_role :admin
+    @users = Admin.all
   end
 
   def create
-    @user = User.new(user_params)
+    @user = Admin.new(user_params)
     if @user.save
       redirect_to superadmin_users_path
     else
@@ -17,12 +17,12 @@ class Superadmin::UsersController < ApplicationController
   end
 
   def new
-    @user = User.new
+    @user = Admin.new
     @user.admin_depts.build
   end
 
   def home
-      @user = User.new
+      @user = Admin.new
   end
 
   def edit
@@ -66,7 +66,7 @@ class Superadmin::UsersController < ApplicationController
   end
 
   def set_user
-    @user = User.find(params[:id])
+    @user = Admin.find(params[:id])
   end
 
   def user_params
@@ -81,8 +81,8 @@ class Superadmin::UsersController < ApplicationController
               :password,
               :password_confirmation,
               department_ids: []
+              # admin_depts_attributes: [:department_id, :id]
             )
-    # admin_depts_attributes: [:id, :department_ids]
   end
 
 end

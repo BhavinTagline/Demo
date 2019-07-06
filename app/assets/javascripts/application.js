@@ -15,9 +15,3 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
-$( document ).ready(function() {
-     $('.leftmenutrigger').on('click', function(e) {
-     $('.side-nav').toggleClass("open");
-     e.preventDefault();
-    });
-});

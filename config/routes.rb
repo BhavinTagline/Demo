@@ -17,6 +17,12 @@ Rails.application.routes.draw do
     get  '/home', to: 'users#home'
     resources :departments
     resources :organizations
+    resources :employees do
+      collection do
+        get 'get_departments', to: 'employees#get_departments'
+      end
+    end
+
     # get  '/account', to: 'users#edit'
     # post  '/account', to: 'users#update'
     # get  '/profile', to: 'users#show'

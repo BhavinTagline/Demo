@@ -13,6 +13,7 @@
         <li><%= link_to "Admin", superadmin_users_path %></li>
         <li><%= link_to "Departments", superadmin_departments_path %></li>
         <li><%= link_to "Oraganization", superadmin_organizations_path %></li>
+        <li><%= link_to "Employee", superadmin_employees_path %></li>
         <li><%= link_to "Account", edit_superadmin_user_path(current_user.id) %></li>
         <li><%= link_to "Logout", destroy_user_session_path, method: :delete %><li>
       <% elsif current_user.has_role? :admin %>
