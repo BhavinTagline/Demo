@@ -6,6 +6,7 @@ class Employee < User
   has_many :departments, through: :employee_depts
   accepts_nested_attributes_for :employee_depts
   # has_many :jobs, foreign_key: "user_id", class_name: "Task"
+  
 
 
 

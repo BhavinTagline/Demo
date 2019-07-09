@@ -9,7 +9,8 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :users
-    # root to: 'admin/users#new'
+    resources :organizations
+    resources :employees
   end
 
   namespace :superadmin do
@@ -22,11 +23,10 @@ Rails.application.routes.draw do
         get 'get_departments', to: 'employees#get_departments'
       end
     end
+  end
 
-    # get  '/account', to: 'users#edit'
-    # post  '/account', to: 'users#update'
-    # get  '/profile', to: 'users#show'
-    # root :to => "superadmin/users#new"
+  namespace :employee do
+    resources :users
   end
 
   # You can have the root of your site routed with "root"

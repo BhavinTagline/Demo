@@ -8,7 +8,7 @@ class Superadmin::UsersController < ApplicationController
   end
 
   def create
-    @user = Admin.new(user_params)
+    @user = User.new(user_params)
     if @user.save
       redirect_to superadmin_users_path
     else
@@ -17,12 +17,12 @@ class Superadmin::UsersController < ApplicationController
   end
 
   def new
-    @user = Admin.new
+    @user = User.new
     @user.admin_depts.build
   end
 
   def home
-      @user = Admin.new
+      @user = User.new
   end
 
   def edit
@@ -66,7 +66,7 @@ class Superadmin::UsersController < ApplicationController
   end
 
   def set_user
-    @user = Admin.find(params[:id])
+    @user = User.find(params[:id])
   end
 
   def user_params

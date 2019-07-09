@@ -22,7 +22,7 @@
 		      <td><%= user.age %></td>
           <td><%= user.country %></td>
 		      <td><%= user.gender %></td>
-          <td><%= user.organization.present? ? user.organization.name : "-" %></td>
+          <td><%= user.admin_organization.present? ? user.admin_organization.name : "-" %></td>
           <td><%= user.departments.pluck(:name).join(' ,') %></td>
           <td><%= user.email %></td>
 		      <td><%= link_to "show", superadmin_user_path(user) %></td>

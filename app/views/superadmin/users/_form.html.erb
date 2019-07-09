@@ -63,7 +63,7 @@
       <%= f.label :department, "Department : " %>
         <% Department.all.each do |d| %>
           <div class="checkbox">
-           <% @user = Admin.find(@user.id)  %>
+           <%# @user = User.find(@user.id)  %>
            <%= check_box_tag "user[department_ids][]", d.id, @user.department_ids.include?(d.id) %>
            <%= d.name %>
           </div>

@@ -1,103 +1,9 @@
 <h1><%= @employee.new_record? ? "Add Employee" : "Edit Employee Profile" %></h1>
-  <div class="row">
-    <div class="col-md-6 col-md-offset-3">
-      <% button = @employee.new_record? ? "Add" : "Update" %>
-        <%= form_for(@employee, url: @employee.new_record? ? superadmin_employees_path : superadmin_employee_path ) do |f| %>
-
-          <div class="form-group">
-            <%= f.label :name %>
-            <%= f.text_field :name, class: 'form-control' %>
-          </div>
-
-          <div class="form-group">
-            <%= f.label :age %>
-            <%= f.text_field :age, class: 'form-control' %>
-          </div>
-
-          <div class="form-group">
-            <%= f.label :country %>
-            <%= f.select :country, %w{India USA Canada}, {:prompt => 'Select Country'}, required: true, placeholder: 'Country', class: 'form-control' %>
-          </div>
-
-          <div class="form-group">
-            <div class="row">
-              <div class="col-md-12 nopadding">
-                <div class="col-md-2 nopadding">
-                  <label class="btn">
-                    <%= f.label :gender, 'Gender :' %>
-                  </label>
-                </div>
-                <div class="col-md-2 nopadding">
-                  <label class="btn">
-                    <%= f.radio_button :gender, 'Male', class: 'inline-block' %>
-                    <%= f.label :gender, 'Male' %>
-                  </label>
-                </div>
-                <div class="col-md-2 nopadding">
-                  <label class="btn">
-                    <%= f.radio_button :gender, 'Female', class: 'inline-block' %>
-                    <%= f.label :gender, 'Female' %>
-                  </label>
-                </div>
-                <div class="col-md-2">
-                  <label class="btn">
-                    <%= f.radio_button :gender, 'Other', class: 'inline-block' %>
-                    <%= f.label :gender, 'Other' %>
-                  </label>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="form-group" id='xyz'>
-            <%= f.label :organization %>
-              <%= f.fields_for :user_organization do |u| %>
-                <%= u.collection_select :organization_id, Organization.all, :id, :name, { }, class: "form-control" %>
-              <% end %>
-          </div>
-
-          <div class="form-group">
-            <%= label :department, "Department : " %>
-            <div class="checkbox">
-            </div>
-          </div>
-              <%#= check_box_tag "employee[department_ids][]",response %>
-              <%#= f.fields_for :admin_depts do |a| %>
-              <%#= a.collection_select :department_id, Department.all, :id, :name %>
-              <%# end %>
-              <%# Department.all.each do |d| %>
-                <!-- <div class="checkbox"> -->
-                 <%#= check_box_tag "employee[department_ids][]", d.id, @user.department_ids.include?(d.id) %>
-                 <%#= d.name %>
-                <!-- </div> -->
-              <%# end %>
-
-
-
-          <div class="form-group">
-            <%= f.label :"email" %>
-            <%= f.email_field :email, class: 'form-control' %>
-          </div>
-
-          <% if @employee.new_record? %>
-            <div class="form-group">
-              <%= f.label :password %>
-              <%= f.password_field :password, class: 'form-control' %>
-            </div>
-
-            <div class="form-group">
-              <%= f.label :password_confirmation, "Confirm Password" %>
-              <%= f.password_field :password_confirmation, class: 'form-control' %>
-            </div>
-          <% end %>
-
-          <div style="display:inline-block;">
-          <%= f.submit button, class: "btn btn-primary btn-md" %></div>
-          <%= link_to "Cancel", superadmin_employees_path, class: "btn btn-primary btn-md" %>
-
-        <% end %>
-    </div>
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= render "share/employee/form" %>
   </div>
+</div>
 
 <script type="text/javascript">
   $(document).ready(function(){
@@ -115,12 +21,6 @@
         },
         success: function(response){
           console.log("res", response)
-          // $('.field').html('');
-          // $.each(response, function () {
-          //   var id = this[0];
-          //   var name = this[1];
-          //   $('.field').append('<input name='+ id +' type="checkbox" /> ' + name);
-          // });
         }
       });
     });

@@ -1,0 +1,104 @@
+<% new_record = @employee.new_record? %>
+<% @check_role = current_user.has_role?(:superadmin) %>
+<% button = new_record ? "Add" : "Update" %>
+<% button_cancel = @check_role ? superadmin_employees_path : admin_employees_path %>
+<% url_superadmin = new_record ? superadmin_employees_path : superadmin_employee_path %>
+<% url_admin = new_record ? admin_employees_path : admin_employee_path %>
+
+  <%= form_for(@employee, url: @check_role ? url_superadmin : url_admin) do |f| %>
+
+    <div class="form-group">
+      <%= f.label :name %>
+      <%= f.text_field :name, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :age %>
+      <%= f.text_field :age, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :country %>
+      <%= f.select :country, %w{India USA Canada}, {:prompt => 'Select Country'}, required: true, placeholder: 'Country', class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+    <div class="row">
+      <div class="col-md-12 nopadding">
+        <div class="col-md-2 nopadding">
+          <label class="btn">
+            <%= f.label :gender, 'Gender :' %>
+          </label>
+        </div>
+        <div class="col-md-2 nopadding">
+          <label class="btn">
+            <%= f.radio_button :gender, 'Male', class: 'inline-block' %>
+            <%= f.label :gender, 'Male' %>
+          </label>
+        </div>
+        <div class="col-md-2 nopadding">
+          <label class="btn">
+            <%= f.radio_button :gender, 'Female', class: 'inline-block' %>
+            <%= f.label :gender, 'Female' %>
+          </label>
+        </div>
+        <div class="col-md-2">
+          <label class="btn">
+            <%= f.radio_button :gender, 'Other', class: 'inline-block' %>
+            <%= f.label :gender, 'Other' %>
+          </label>
+        </div>
+      </div>
+    </div>
+    </div>
+
+    <% if @check_role %>
+      <div class="form-group" id='xyz'>
+        <%= f.label :organization %>
+          <%= f.fields_for :user_organization do |u| %>
+            <%= u.collection_select :organization_id, Organization.all, :id, :name, {}, class: "form-control" %>
+          <% end %>
+        </div>
+    <% else %>
+      <%= f.fields_for :user_organization do |u| %>
+        <%= u.hidden_field :organization_id, :value => @admin_org.id %>
+      <% end %>
+    <% end %>
+
+    <div class="form-group">
+      <%= label :department, "Department : " %>
+      <% if @check_role %>
+        <div class="checkbox">
+        </div>
+      <% else %>
+        <% current_user.departments.all.each do |d| %>
+          <div class="checkbox">
+           <%= check_box_tag "employee[department_ids][]", d.id, @employee.department_ids.include?(d.id) %>
+           <%= d.name %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :"email" %>
+      <%= f.email_field :email, class: 'form-control' %>
+    </div>
+
+    <% if @employee.new_record? %>
+      <div class="form-group">
+        <%= f.label :password %>
+        <%= f.password_field :password, class: 'form-control' %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :password_confirmation, "Confirm Password" %>
+        <%= f.password_field :password_confirmation, class: 'form-control' %>
+      </div>
+    <% end %>
+
+    <div style="display:inline-block;">
+    <%= f.submit button, class: "btn btn-primary btn-md" %></div>
+    <%= link_to "Cancel", button_cancel , class: "btn btn-primary btn-md" %>
+
+<% end %>

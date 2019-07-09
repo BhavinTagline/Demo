@@ -1,0 +1,46 @@
+<% new_record = @organization.new_record? %>
+<h1><%= new_record ? "Add Organization" : "Edit Organization" %></h1>
+<div class="row">
+  <div class="col-md-4 col-md-offset-4">
+    <% button = new_record ? "Add" : "Update" %>
+    <% check_role = (current_user.has_role?(:superadmin)) %>
+    <% button_cancel = check_role ? superadmin_organizations_path : admin_organizations_path %>
+    <% url_superadmin = new_record ? superadmin_organizations_path : superadmin_organization_path %>
+    <% url_admin = new_record ? admin_organizations_path : admin_organization_path %>
+      <%= form_for(@organization, url: check_role ? url_superadmin : url_admin) do |f| %>
+
+      <%#= render 'shared/error_messages', object: f.object %>
+
+    <div class="form-group">
+      <%= f.label :name %>
+      <%= f.text_field :name, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :admin %>
+      <% if check_role %>
+         <%= f.select :user_id, options_for_select(@users, @organization.user_id), {:prompt => "Please select"}, class: "form-control" %>
+      <% else %>
+        <%= f.text_field :user_email, :value => current_user.email, :readonly => true, class: "form-control" %>
+        <%= f.hidden_field :user_id, :value => current_user.id %>
+      <% end %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :address %>
+      <%= f.text_field :address, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :email %>
+      <%= f.email_field :email, class: 'form-control' %>
+    </div>
+
+    <div style="display:inline-block;">
+      <%= f.submit button, class: "btn btn-primary" %></div>
+      <%= link_to "Cancel", button_cancel, class: "btn btn-primary" %>
+    </div>
+    <% end %>
+
+  </div>
+</div>

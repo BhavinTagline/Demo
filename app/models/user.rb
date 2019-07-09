@@ -8,6 +8,8 @@ class User < ActiveRecord::Base
   has_one :organization, through: :user_organization
   accepts_nested_attributes_for :user_organization
 
+  has_one :admin_organization, class_name: "Organization", foreign_key: :user_id
+
   # scope :admin, -> { order("name") }
   # scope :employee, -> { order("id") }
 
@@ -20,7 +22,6 @@ class User < ActiveRecord::Base
   enum gender: [:Male, :Female, :Other]
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-
 
 
   # def admin_organizations

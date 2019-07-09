@@ -20,12 +20,14 @@ class Admin::UsersController < ApplicationController
   end
 
   def update
-     if @user.update_attributes(user_update_params)
+     if @user.update_attributes(user_params)
        redirect_to admin_user_path
      else
        render 'edit'
      end
   end
+
+  
 
   # def destroy
   #   User.find(params[:id]).destroy
@@ -44,7 +46,7 @@ class Admin::UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
-  def user_update_params
+  def user_params
     params.require(:user).permit(:name, :age, :country, :gender, :email)
   end
 

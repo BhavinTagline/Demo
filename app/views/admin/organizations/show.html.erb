@@ -1,0 +1,32 @@
+<h1>Organization</h1>
+<div class="row">
+  <div class="col-md-4 col-md-offset-4">
+		<table class="table table-hover">
+      <thead class="thead-dark">
+				<tr>
+          <td class="tbl_head">Column</td>
+          <td class="tbl_head">Value</td>
+        </tr>
+      </thead>
+      <tbody class="thead-light">
+        <tr>
+          <td><%= label :name, "Name", class: "tbl_label" %></td>
+          <td><%= label :name, @organization.name, class: "tbl_label" %></td>
+        </tr>
+        <tr>
+          <td><%= label :admin, "Admin", class: "tbl_label" %></td>
+          <td><%= label :address, @organization.user.try(:email), class: "tbl_label" %></td>
+        </tr>
+        <tr>
+          <td><%= label :address, "Address", class: "tbl_label" %></div>
+          <td><%= label :address, @organization.address, class: "tbl_label" %></div>
+        </tr>
+        <tr>
+          <td><%= label :email, "Email", class: "tbl_label" %></td>
+          <td><%= label :email, @organization.email, class: "tbl_label" %></td>
+        </tr>
+		  </tbody>
+		</table>
+    <p align="right"><%= link_to "Back", admin_organizations_path, class: "btn btn-primary" %></p>
+	</div>
+</div>

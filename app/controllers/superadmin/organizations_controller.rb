@@ -18,17 +18,17 @@ before_action :set_organization, only: [:edit, :show, :update, :destroy]
     def new
       @organization = Organization.new
       @users = Admin.all
-      @users = @users.collect {|user| [user.email, user.id] if user.organization.nil?}.compact
+      @users = @users.collect {|user| [user.email, user.id] if user.admin_organization.nil?}.compact
     end
 
     def edit
       @users = Admin.all
-      @users = @users.collect {|user| [user.email, user.id] if user.organization.nil?}.compact
-      # puts "--------#{@users}------------"
+      @users = @users.collect {|user| [user.email, user.id] if user.admin_organization.nil?}.compact
+      puts "-----1---#{@users}------------"
       user = @organization.user
-      # puts "--------#{@organization}------------"
+      puts "-----2---#{@organization.user}------------"
       @users << ([user.email, user.id])
-      
+        puts "----3----#{@users}------------"
 
     end
 
