@@ -25,7 +25,7 @@ before_action :set_organization, only: [:edit, :show, :update, :destroy]
     end
 
     def edit
-      # authorize! :update, @organization
+    # authorize! :edit, current_user
     #   @users = Admin.all
     #   @users = @users.collect {|user| [user.email, user.id] if user.admin_organization.nil?}.compact
     #   user = @organization.user
@@ -39,6 +39,7 @@ before_action :set_organization, only: [:edit, :show, :update, :destroy]
        else
          render 'edit'
        end
+       authorize! :update, @organization
      end
 
      def destroy

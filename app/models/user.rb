@@ -30,6 +30,10 @@ class User < ActiveRecord::Base
   #     Organization.where(user_id: self.id)
   #   end
   # end
+  def admin?
+    self.has_role?(:admin)
+  end
+
 
   def assign_default_role
     self.add_role(:admin) if self.roles.blank?

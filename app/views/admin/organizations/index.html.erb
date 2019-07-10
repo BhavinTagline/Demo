@@ -24,7 +24,7 @@
 
           <!-- <td><%#= link_to "show", superadmin_department_path(user) %></td> -->
           <% if current_user == organization_user %>
-            <td><%= link_to "Edit", edit_admin_organization_path(organization) %></td>
+            <td><%= link_to "Edit", edit_admin_organization_path(organization) if can? :update, Organization %></td>
           <% else %>
             <td><%= link_to "Show", admin_organization_path(organization)  %></td>
           <% end %>
